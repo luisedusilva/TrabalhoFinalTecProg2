@@ -1,0 +1,27 @@
+﻿@model LocadoraDeVeiculos.ViewModels.ClienteIndexViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Clientes</h2>
+
+
+@if (Model.Clientes.Count > 0)
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr><th>Clientes</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var cliente in Model.Clientes)
+            {
+                <tr><td>@Html.ActionLink(@cliente.Nome,"Details",new { cliente.Id })</td></tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>We don't have any movies yet.</p>
+}

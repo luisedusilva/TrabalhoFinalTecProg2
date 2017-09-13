@@ -205,6 +205,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709060012361_InitialMigration.cs" />
+    <Compile Include="Migrations\201709060012361_InitialMigration.Designer.cs">
+      <DependentUpon>201709060012361_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709060048596_criacaoChaveEstrangeiraLocacao.cs" />
+    <Compile Include="Migrations\201709060048596_criacaoChaveEstrangeiraLocacao.Designer.cs">
+      <DependentUpon>201709060048596_criacaoChaveEstrangeiraLocacao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -297,6 +306,14 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201709060012361_InitialMigration.resx">
+      <DependentUpon>201709060012361_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709060048596_criacaoChaveEstrangeiraLocacao.resx">
+      <DependentUpon>201709060048596_criacaoChaveEstrangeiraLocacao.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

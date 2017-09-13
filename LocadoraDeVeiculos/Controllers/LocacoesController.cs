@@ -5,13 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace LocadoraDeVeiculos.Controllers
 {
     public class LocacoesController : Controller
     {
         // GET: ValorLocacao
-       
+
+        private ApplicationDbContext _context;
 
         public List<Locacao> Locacoes = new List<Locacao>
         {
@@ -21,29 +23,37 @@ namespace LocadoraDeVeiculos.Controllers
 
 
         // GET: Cliente
+        public LocacoesController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+        // GET: Cliente
         public ActionResult Index()
         {
 
-            var viewModel = new LocacaoIndexViewModel
-            {
-                Locacoes = Locacoes
-            };
+            var locacoes = _context.Locacoes.ToList();
 
-            return View(viewModel);
+
+            return View(locacoes);
         }
 
         public ActionResult Details(int id)
         {
-            if (Locacoes.Count < id)
+            var locacao = _context.Clientes.ToList();
+
+            if (locacao == null)
             {
                 return HttpNotFound();
             }
 
-            var cliente = Locacoes[id - 1];
-
-            return View(cliente);
+            return View(locacao);
 
         }
-    }
 
+    }
 }

@@ -25,6 +25,11 @@ namespace LocadoraDeVeiculos.Models
         {
         }
 
+        public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Locacao> Locacoes { get; set; }
+        public DbSet<Veiculo> Veiculos { get; set; }
+        public DbSet<Vendedor> Vendedores { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

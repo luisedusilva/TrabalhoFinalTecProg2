@@ -11,8 +11,8 @@ namespace LocadoraDeVeiculos.Controllers
     public class VendedoresController : Controller
     {
         // GET: Vendedor
-      
 
+        private ApplicationDbContext _context;
 
         public List<Vendedor> Vendedores = new List<Vendedor>
         {
@@ -45,5 +45,38 @@ namespace LocadoraDeVeiculos.Controllers
             return View(cliente);
 
         }
+
+        public VendedoresController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+        // GET: Cliente
+        public ActionResult Index()
+        {
+
+            var vendedores = _context.Clientes.ToList();
+
+
+            return View(vendedores);
+        }
+
+        public ActionResult Details(int id)
+        {
+            var vendedor = _context.Vendedores.ToList();
+
+            if (vendedor == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(vendedor);
+
+        }
     }
 }
+

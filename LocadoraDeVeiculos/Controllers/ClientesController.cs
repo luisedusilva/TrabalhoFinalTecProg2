@@ -14,11 +14,7 @@ namespace LocadoraDeVeiculos.Controllers
 
         private ApplicationDbContext _context;
 
-        public List<Cliente> Clientes = new List<Cliente>
-        {
-            new Cliente {Nome = "Luis", Id = 1, CPF = "123.456.789-00", Idade = 18},
-            new Cliente {Nome = "João", Id = 2, CPF = "987.654.321-32", Idade = 60}
-        };
+        
 
         public ClientesController()
         {
@@ -30,6 +26,7 @@ namespace LocadoraDeVeiculos.Controllers
             _context.Dispose();
         }
         // GET: Cliente
+
         public ActionResult Index()
         {
 
@@ -50,6 +47,49 @@ namespace LocadoraDeVeiculos.Controllers
 
             return View(cliente);
 
+        }
+
+        public ActionResult New()
+        {
+           
+            var cliente = new Cliente();
+
+            return View("ClienteForm", cliente);
+        }
+
+        [HttpPost] // só será acessada com POST
+        public ActionResult Save(Cliente cliente) // recebemos um cliente
+        {
+            if (cliente.Id == 0)
+            {
+                // armazena o cliente em memória
+                _context.Clientes.Add(cliente);
+            }
+            else
+            {
+                var customerInDb = _context.Clientes.Single(c => c.Id == cliente.Id);
+
+                customerInDb.Nome = cliente.Nome;
+                customerInDb.CPF = cliente.CPF;
+                customerInDb.Idade = cliente.Idade;
+                
+            }
+
+            // faz a persistência
+            _context.SaveChanges();
+            // Voltamos para a lista de clientes
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var cliente = _context.Clientes.SingleOrDefault(c => c.Id == id);
+
+            if (cliente == null)
+                return HttpNotFound();
+
+
+            return View("ClienteForm", cliente);
         }
     }
 }

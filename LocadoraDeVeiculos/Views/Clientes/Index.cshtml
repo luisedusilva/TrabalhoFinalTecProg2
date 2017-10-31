@@ -1,4 +1,4 @@
-﻿@model LocadoraDeVeiculos.ViewModels.ClienteIndexViewModel
+﻿@model IEnumerable<LocadoraDeVeiculos.Models.Cliente>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,14 +7,14 @@
 <h2>Clientes</h2>
 
 
-@if (Model.Clientes.Count > 0)
+@if (Model.Any())
 {
     <table class="table table-bordered table-hover">
         <thead>
             <tr><th>Clientes</th></tr>
         </thead>
         <tbody>
-            @foreach (var cliente in Model.Clientes)
+            @foreach (var cliente in Model)
             {
                 <tr><td>@Html.ActionLink(@cliente.Nome,"Details",new { cliente.Id })</td></tr>
             }
@@ -23,5 +23,5 @@
 }
 else
 {
-    <p>We don't have any movies yet.</p>
+    <p>Não há nenhum cliente cadastrado!</p>
 }

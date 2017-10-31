@@ -10,42 +10,11 @@ namespace LocadoraDeVeiculos.Controllers
 {
     public class VeiculosController : Controller
     {
-        // GET: Veiculo
 
 
         private ApplicationDbContext _context;
 
-        public List<Veiculo> Veiculos = new List<Veiculo>
-        {
-            new Veiculo {Id = 1, Marca = "Fiat", Modelo = "Uno", Ano = 2000, Placa = "ABC-123", ValorDiaria = 90},
-            new Veiculo {Id = 2, Marca = "Chevrolet", Modelo = "Corsa", Ano = 2005, Placa = "DEF-456", ValorDiaria = 85}
-        };
 
-
-        // GET: Cliente
-        public ActionResult Index()
-        {
-
-            var viewModel = new VeiculoIndexViewModel
-            {
-                Veiculos = Veiculos
-            };
-
-            return View(viewModel);
-        }
-
-        public ActionResult Details(int id)
-        {
-            if (Veiculos.Count < id)
-            {
-                return HttpNotFound();
-            }
-
-            var cliente = Veiculos[id - 1];
-
-            return View(cliente);
-
-        }
 
         public VeiculosController()
         {
@@ -57,6 +26,7 @@ namespace LocadoraDeVeiculos.Controllers
             _context.Dispose();
         }
         // GET: Cliente
+
         public ActionResult Index()
         {
 
@@ -77,6 +47,49 @@ namespace LocadoraDeVeiculos.Controllers
 
             return View(veiculo);
 
+        }
+
+        public ActionResult New()
+        {
+
+            var veiculo = new Veiculo();
+
+            return View("VeiculoForm", veiculo);
+        }
+
+        [HttpPost] // só será acessada com POST
+        public ActionResult Save(Veiculo veiculo) // recebemos um cliente
+        {
+            if (veiculo.Id == 0)
+            {
+                // armazena o cliente em memória
+                _context.Veiculos.Add(veiculo);
+            }
+            else
+            {
+                var customerInDb = _context.Veiculos.Single(c => c.Id == veiculo.Id);
+
+                customerInDb.Marca = veiculo.Marca;
+                customerInDb.Modelo = veiculo.Modelo;
+                customerInDb.Placa = veiculo.Placa;
+                customerInDb.ValorDiaria = veiculo.ValorDiaria;
+            }
+
+            // faz a persistência
+            _context.SaveChanges();
+            // Voltamos para a lista de clientes
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var veiculo = _context.Veiculos.SingleOrDefault(c => c.Id == id);
+
+            if (veiculo == null)
+                return HttpNotFound();
+
+
+            return View("VeiculoForm", veiculo);
         }
     }
 }

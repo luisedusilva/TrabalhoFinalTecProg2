@@ -8,7 +8,7 @@ namespace LocadoraDeVeiculos.ViewModels
 {
     public class ClienteIndexViewModel
     {
-        public List<Cliente> Clientes
+        public Cliente Cliente
         {
             get; set;
         }

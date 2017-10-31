@@ -11,18 +11,10 @@ namespace LocadoraDeVeiculos.Controllers
 {
     public class LocacoesController : Controller
     {
-        // GET: ValorLocacao
-
         private ApplicationDbContext _context;
 
-        public List<Locacao> Locacoes = new List<Locacao>
-        {
-            new Locacao {Id = 1, DataLocacao = "10/08/2017", DataDevolucao = "12/08/2017"},
-            new Locacao {Id = 2, DataLocacao = "15/08/2017", DataDevolucao = "17/08/2017"}
-        };
 
 
-        // GET: Cliente
         public LocacoesController()
         {
             _context = new ApplicationDbContext();
@@ -33,6 +25,7 @@ namespace LocadoraDeVeiculos.Controllers
             _context.Dispose();
         }
         // GET: Cliente
+
         public ActionResult Index()
         {
 
@@ -44,7 +37,7 @@ namespace LocadoraDeVeiculos.Controllers
 
         public ActionResult Details(int id)
         {
-            var locacao = _context.Clientes.ToList();
+            var locacao = _context.Locacoes.ToList();
 
             if (locacao == null)
             {
@@ -55,5 +48,47 @@ namespace LocadoraDeVeiculos.Controllers
 
         }
 
+        public ActionResult New()
+        {
+
+            var locacao = new Locacao();
+
+            return View("LocacaoForm", locacao);
+        }
+
+        [HttpPost] // só será acessada com POST
+        public ActionResult Save(Locacao locacao) // recebemos um cliente
+        {
+            if (locacao.Id == 0)
+            {
+                // armazena o cliente em memória
+                _context.Locacoes.Add(locacao);
+            }
+            else
+            {
+                var customerInDb = _context.Locacoes.Single(c => c.Id == locacao.Id);
+
+                customerInDb.DataLocacao = locacao.DataLocacao;
+                customerInDb.DataDevolucao = locacao.DataDevolucao;             
+                customerInDb.Veiculo = locacao.Veiculo;
+
+            }
+
+            // faz a persistência
+            _context.SaveChanges();
+            // Voltamos para a lista de clientes
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var locacao = _context.Locacoes.SingleOrDefault(c => c.Id == id);
+
+            if (locacao == null)
+                return HttpNotFound();
+
+
+            return View("LocacaoForm", locacao);
+        }
     }
 }

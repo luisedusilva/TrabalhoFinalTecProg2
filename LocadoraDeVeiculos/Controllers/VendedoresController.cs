@@ -14,37 +14,7 @@ namespace LocadoraDeVeiculos.Controllers
 
         private ApplicationDbContext _context;
 
-        public List<Vendedor> Vendedores = new List<Vendedor>
-        {
-            new Vendedor {Id = 1, Nome = "José", Cadastro = 10533},
-            new Vendedor {Id = 2, Nome = "João", Cadastro = 49578}
-        };
 
-
-        // GET: Cliente
-        public ActionResult Index()
-        {
-
-            var viewModel = new VendedorIndexViewModel
-            {
-                Vendedores = Vendedores
-            };
-
-            return View(viewModel);
-        }
-
-        public ActionResult Details(int id)
-        {
-            if (Vendedores.Count < id)
-            {
-                return HttpNotFound();
-            }
-
-            var cliente = Vendedores[id - 1];
-
-            return View(cliente);
-
-        }
 
         public VendedoresController()
         {
@@ -56,10 +26,11 @@ namespace LocadoraDeVeiculos.Controllers
             _context.Dispose();
         }
         // GET: Cliente
+
         public ActionResult Index()
         {
 
-            var vendedores = _context.Clientes.ToList();
+            var vendedores = _context.Vendedores.ToList();
 
 
             return View(vendedores);
@@ -76,6 +47,48 @@ namespace LocadoraDeVeiculos.Controllers
 
             return View(vendedor);
 
+        }
+
+        public ActionResult New()
+        {
+
+            var vendedor = new Vendedor();
+
+            return View("VendedorForm", vendedor);
+        }
+
+        [HttpPost] // só será acessada com POST
+        public ActionResult Save(Vendedor vendedor) // recebemos um cliente
+        {
+            if (vendedor.Id == 0)
+            {
+                // armazena o cliente em memória
+                _context.Vendedores.Add(vendedor);
+            }
+            else
+            {
+                var customerInDb = _context.Vendedores.Single(c => c.Id == vendedor.Id);
+
+                customerInDb.Cadastro = vendedor.Cadastro;
+                customerInDb.Nome = vendedor.Nome;
+
+            }
+
+            // faz a persistência
+            _context.SaveChanges();
+            // Voltamos para a lista de clientes
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var vendedor = _context.Vendedores.SingleOrDefault(c => c.Id == id);
+
+            if (vendedor == null)
+                return HttpNotFound();
+
+
+            return View("VeiculoForm", vendedor);
         }
     }
 }

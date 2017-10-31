@@ -1,0 +1,23 @@
+﻿@model LocadoraDeVeiculos.Models.Vendedor
+@{
+    ViewBag.Title = "VendedorForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+@using (Html.BeginForm("Save", "Vendedores"))
+{
+    @Html.HiddenFor(m => m.Id)
+    <div class="form-group">
+        @Html.LabelFor(m => m.Nome)
+        @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Cadastro)
+        @Html.TextBoxFor(m => m.Cadastro, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+}

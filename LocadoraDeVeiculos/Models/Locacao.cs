@@ -18,6 +18,7 @@ namespace LocadoraDeVeiculos.Models
         [Required]
         [Display(Name = "Data de Devolução")]
         public string DataDevolucao { get; set; }
+
     }
 
 }

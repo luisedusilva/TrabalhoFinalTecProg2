@@ -9,14 +9,29 @@
 
 @if (Model.Any())
 {
-    <table class="table table-bordered table-hover">
+    <table class="table">
         <thead>
-            <tr><th>Clientes</th></tr>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>CPF</th>
+                <th>Opções</th>
+            </tr>
         </thead>
         <tbody>
             @foreach (var cliente in Model)
             {
-                <tr><td>@Html.ActionLink(@cliente.Nome,"Details",new { cliente.Id })</td></tr>
+                <tr>
+                    <th scope="row">@cliente.Id</th>
+                    <td>@cliente.Nome</td>
+                    <td>@cliente.Idade</td>
+                    <td>@cliente.CPF</td>
+                    <td>
+                        @Html.ActionLink("Ver", "Details", new { cliente.Id }, new { @class = "btn btn-success btn-xs" })
+                        @Html.ActionLink("Editar", "Edit", new { cliente.Id }, new { @class = "btn btn-warning btn-xs" })
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

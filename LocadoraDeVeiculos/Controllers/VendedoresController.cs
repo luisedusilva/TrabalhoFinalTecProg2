@@ -88,7 +88,7 @@ namespace LocadoraDeVeiculos.Controllers
                 return HttpNotFound();
 
 
-            return View("VeiculoForm", vendedor);
+            return View("VendedorForm", vendedor);
         }
     }
 }

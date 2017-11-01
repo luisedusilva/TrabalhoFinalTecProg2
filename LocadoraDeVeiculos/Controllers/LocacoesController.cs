@@ -37,7 +37,7 @@ namespace LocadoraDeVeiculos.Controllers
 
         public ActionResult Details(int id)
         {
-            var locacao = _context.Locacoes.ToList();
+            var locacao = _context.Locacoes.SingleOrDefault(c => c.Id == id);
 
             if (locacao == null)
             {
@@ -59,6 +59,11 @@ namespace LocadoraDeVeiculos.Controllers
         [HttpPost] // só será acessada com POST
         public ActionResult Save(Locacao locacao) // recebemos um cliente
         {
+            if (!ModelState.IsValid)
+            {
+                return View("LocacaoForm", locacao);
+            }
+
             if (locacao.Id == 0)
             {
                 // armazena o cliente em memória

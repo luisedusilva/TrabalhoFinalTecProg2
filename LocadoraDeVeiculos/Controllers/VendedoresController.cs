@@ -38,7 +38,7 @@ namespace LocadoraDeVeiculos.Controllers
 
         public ActionResult Details(int id)
         {
-            var vendedor = _context.Vendedores.ToList();
+            var vendedor = _context.Vendedores.SingleOrDefault(c => c.Id == id);
 
             if (vendedor == null)
             {

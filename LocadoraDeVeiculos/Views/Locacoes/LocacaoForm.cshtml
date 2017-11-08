@@ -1,4 +1,4 @@
-﻿@model LocadoraDeVeiculos.Models.Locacao
+﻿@model LocadoraDeVeiculos.ViewModels.LocacaoIndexViewModel
 @{
     ViewBag.Title = "LocacaoForm";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,21 +9,29 @@
 
 @using (Html.BeginForm("Save", "Locacoes"))
 {
-    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.Locacao.Id)
     <div class="form-group">
-        @Html.LabelFor(m => m.DataLocacao)
-        @Html.TextBoxFor(m => m.DataLocacao, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.DataLocacao)
+        @Html.LabelFor(m => m.Locacao.DataLocacao)
+        @Html.TextBoxFor(m => m.Locacao.DataLocacao, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Locacao.DataLocacao)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.DataDevolucao)
-        @Html.TextBoxFor(m => m.DataDevolucao, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.DataDevolucao)
+        @Html.LabelFor(m => m.Locacao.Veiculo)
+        @Html.DropDownListFor(m => m.Locacao.Veiculo,
+            new SelectList(Model.Veiculos, "Id", "Modelo"), "Escolha", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Locacao.Veiculo)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Veiculo)
-        @Html.TextBoxFor(m => m.Veiculo, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Veiculo)
+        @Html.LabelFor(m => m.Locacao.Vendedor)
+        @Html.DropDownListFor(m => m.Locacao.Vendedor,
+            new SelectList(Model.Vendedores, "Id", "Nome"), "Escolha", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Locacao.Vendedor)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Locacao.Cliente)
+        @Html.DropDownListFor(m => m.Locacao.Cliente,
+            new SelectList(Model.Clientes, "Id", "Nome"), "Escolha", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Locacao.Cliente)
     </div>
 
     <button type="submit" class="btn btn-primary">Salvar</button>

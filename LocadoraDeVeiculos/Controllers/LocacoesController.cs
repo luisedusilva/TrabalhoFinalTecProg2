@@ -28,16 +28,14 @@ namespace LocadoraDeVeiculos.Controllers
 
         public ActionResult Index()
         {
-
-            var locacoes = _context.Locacoes.ToList();
-
-
+            var locacoes = _context.Locacoes.Include(a => a.Veiculo).Include(b => b.Cliente).Include(c => c.Vendedor).ToList();
             return View(locacoes);
+
         }
 
         public ActionResult Details(int id)
         {
-            var locacao = _context.Locacoes.SingleOrDefault(c => c.Id == id);
+            var locacao = _context.Locacoes.Include(a => a.Veiculo).Include(b => b.Cliente).Include(c => c.Vendedor).SingleOrDefault(a => a.Id == id);
 
             if (locacao == null)
             {
@@ -51,7 +49,13 @@ namespace LocadoraDeVeiculos.Controllers
         public ActionResult New()
         {
 
-            var locacao = new Locacao();
+            var locacao = new LocacaoIndexViewModel
+            {
+                Locacao = new Locacao(),
+                Veiculos = _context.Veiculos.ToList(),
+                Clientes = _context.Clientes.ToList(),
+                Vendedores = _context.Vendedores.ToList(),
+            };
 
             return View("LocacaoForm", locacao);
         }
@@ -61,7 +65,15 @@ namespace LocadoraDeVeiculos.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("LocacaoForm", locacao);
+                var viewModel = new LocacaoIndexViewModel
+                {
+                    Locacao = locacao,
+                    Veiculos = _context.Veiculos.ToList(),
+                    Clientes = _context.Clientes.ToList(),
+                    Vendedores = _context.Vendedores.ToList()
+
+                };
+                return View("LocacaoForm", viewModel);
             }
 
             if (locacao.Id == 0)
@@ -71,11 +83,10 @@ namespace LocadoraDeVeiculos.Controllers
             }
             else
             {
-                var customerInDb = _context.Locacoes.Single(c => c.Id == locacao.Id);
+                var locacaoInDb = _context.Locacoes.Single(c => c.Id == locacao.Id);
 
-                customerInDb.DataLocacao = locacao.DataLocacao;
-                customerInDb.DataDevolucao = locacao.DataDevolucao;             
-                customerInDb.Veiculo = locacao.Veiculo;
+                locacaoInDb.DataLocacao = locacao.DataLocacao;
+                locacaoInDb.Veiculo = locacao.Veiculo;
 
             }
 
@@ -92,8 +103,17 @@ namespace LocadoraDeVeiculos.Controllers
             if (locacao == null)
                 return HttpNotFound();
 
+            var viewModel = new LocacaoIndexViewModel
+            {
+                Locacao = locacao,
+                Veiculos = _context.Veiculos.ToList(),
+                Clientes = _context.Clientes.ToList(),
+                Vendedores = _context.Vendedores.ToList(),
 
-            return View("LocacaoForm", locacao);
+            };
+
+
+            return View("LocacaoForm", viewModel);
         }
     }
 }

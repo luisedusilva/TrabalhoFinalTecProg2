@@ -39,8 +39,14 @@
             }
         </tbody>
     </table>
+    <p>
+        @Html.ActionLink("Novo Veículo", "New", null, new { @class = "btn btn-primary" })
+    </p>
 }
 else
 {
+    <p>
+        @Html.ActionLink("Novo Veículo", "New", null, new { @class = "btn btn-primary" })
+    </p>
     <p>Não há nenhum veículo cadastrado.</p>
 }

@@ -13,11 +13,15 @@ namespace LocadoraDeVeiculos.Models
         [Display(Name = "Veiculo")]
         public Veiculo Veiculo { get; set; }
         [Required]
+        [Display(Name = "Cliente")]
+        public Cliente Cliente { get; set; }
+        [Required]
+        [Display(Name = "Vendedor")]
+        public Vendedor Vendedor { get; set; }
+        [Required]
         [Display(Name = "Data de Locação")]
         public string DataLocacao { get; set; }
-        [Required]
-        [Display(Name = "Data de Devolução")]
-        public string DataDevolucao { get; set; }
+
 
     }
 

@@ -9,6 +9,7 @@
 
 @if (Model.Any())
 {
+    
     <table class="table">
         <thead>
             <tr>
@@ -20,6 +21,7 @@
             </tr>
         </thead>
         <tbody>
+            
             @foreach (var cliente in Model)
             {
                 <tr>
@@ -33,10 +35,17 @@
                     </td>
                 </tr>
             }
+            
         </tbody>
     </table>
+    <p>
+        @Html.ActionLink("Novo Cliente", "New", null, new { @class = "btn btn-primary" })
+    </p>
 }
 else
 {
+    <p>
+        @Html.ActionLink("Novo Cliente", "New", null, new { @class = "btn btn-primary" })
+    </p>
     <p>Não há nenhum cliente cadastrado!</p>
 }

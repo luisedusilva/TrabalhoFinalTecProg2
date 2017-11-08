@@ -33,8 +33,14 @@
             }
         </tbody>
     </table>
+    <p>
+        @Html.ActionLink("Novo Vendedor", "New", null, new { @class = "btn btn-primary" })
+    </p>
 }
 else
 {
+    <p>
+        @Html.ActionLink("Novo Vendedor", "New", null, new { @class = "btn btn-primary" })
+    </p>
     <p>Não há nenhum vendedor cadastrado!</p>
 }

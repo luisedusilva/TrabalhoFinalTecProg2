@@ -230,6 +230,10 @@
     <Compile Include="Migrations\201710312333421_veiculo.Designer.cs">
       <DependentUpon>201710312333421_veiculo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711080006118_forms.cs" />
+    <Compile Include="Migrations\201711080006118_forms.Designer.cs">
+      <DependentUpon>201711080006118_forms.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cliente.cs" />
@@ -351,6 +355,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710312333421_veiculo.resx">
       <DependentUpon>201710312333421_veiculo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711080006118_forms.resx">
+      <DependentUpon>201711080006118_forms.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

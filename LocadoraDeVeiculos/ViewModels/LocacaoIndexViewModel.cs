@@ -8,9 +8,11 @@ namespace LocadoraDeVeiculos.ViewModels
 {
     public class LocacaoIndexViewModel
     {
-        public Cliente Cliente
-        {
-            get; set;
-        }
+        public List<Veiculo> Veiculos { get; set; }
+        public List<Vendedor> Vendedores { get; set; }
+        public List<Cliente> Clientes { get; set; }
+
+        public Locacao Locacao { get; set; }
+
     }
 }

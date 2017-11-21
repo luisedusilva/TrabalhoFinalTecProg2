@@ -9,8 +9,12 @@
 
 @if (Model.Any())
 {
-    
-    <table class="table">
+
+    <p>
+        @Html.ActionLink("Novo Cliente", "New", null, new { @class = "btn btn-primary" })
+    </p>
+
+    <table id="clientes" class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>Id</th>
@@ -21,7 +25,7 @@
             </tr>
         </thead>
         <tbody>
-            
+
             @foreach (var cliente in Model)
             {
                 <tr>
@@ -32,15 +36,15 @@
                     <td>
                         @Html.ActionLink("Ver", "Details", new { cliente.Id }, new { @class = "btn btn-success btn-xs" })
                         @Html.ActionLink("Editar", "Edit", new { cliente.Id }, new { @class = "btn btn-warning btn-xs" })
+                        <button data-cliente-id="@cliente.Id" class="btn btn-danger btn-xs js-delete"> Remover </button>
+
                     </td>
                 </tr>
             }
-            
+
         </tbody>
     </table>
-    <p>
-        @Html.ActionLink("Novo Cliente", "New", null, new { @class = "btn btn-primary" })
-    </p>
+   
 }
 else
 {
@@ -48,4 +52,37 @@ else
         @Html.ActionLink("Novo Cliente", "New", null, new { @class = "btn btn-primary" })
     </p>
     <p>Não há nenhum cliente cadastrado!</p>
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $("#clientes").on("click",".js-delete",
+                function () {
+                    var button = $(this);
+                    bootbox.confirm("Tem certeza que quer remover este cliente?",
+                        function(result) {
+                            if (result) {
+                                $.ajax({
+                                    url: "/clientes/delete/" + button.attr("data-cliente-id"),
+                                    method: "GET",
+                                    success: function() {
+                                        button.parents("tr").remove();
+                                    }
+                                });
+                            }
+                        });
+                    /*if (confirm("Tem certeza que quer remover este cliente?")) {
+                        $.ajax({
+                            url: "/customers/delete/" + button.attr("data-customer-id"),
+                            method: "GET",
+                            success: function() {
+                                button.parents("tr").remove();
+                            }
+                        });
+                    }*/
+                });
+        });
+    </script>
 }

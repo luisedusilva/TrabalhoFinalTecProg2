@@ -90,6 +90,19 @@ namespace LocadoraDeVeiculos.Controllers
 
             return View("VendedorForm", vendedor);
         }
+
+        public ActionResult Delete(int id)
+        {
+            var vendedor = _context.Vendedores.SingleOrDefault(c => c.Id == id);
+
+            if (vendedor == null)
+                return HttpNotFound();
+
+            _context.Vendedores.Remove(vendedor);
+            _context.SaveChanges();
+
+            return new HttpStatusCodeResult(200);
+        }
     }
 }
 

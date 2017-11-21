@@ -115,5 +115,18 @@ namespace LocadoraDeVeiculos.Controllers
 
             return View("LocacaoForm", viewModel);
         }
+
+        public ActionResult Delete(int id)
+        {
+            var locacao = _context.Locacoes.SingleOrDefault(c => c.Id == id);
+
+            if (locacao == null)
+                return HttpNotFound();
+
+            _context.Locacoes.Remove(locacao);
+            _context.SaveChanges();
+
+            return new HttpStatusCodeResult(200);
+        }
     }
 }

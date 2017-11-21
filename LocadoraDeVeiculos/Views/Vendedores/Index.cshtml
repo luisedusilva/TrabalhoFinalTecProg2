@@ -9,6 +9,11 @@
 
 @if (Model.Any())
 {
+
+    <p>
+        @Html.ActionLink("Novo Vendedor", "New", null, new { @class = "btn btn-primary" })
+    </p>
+
     <table class="table">
         <thead>
             <tr>
@@ -28,14 +33,13 @@
                     <td>
                         @Html.ActionLink("Ver", "Details", new { cliente.Id }, new { @class = "btn btn-success btn-xs" })
                         @Html.ActionLink("Editar", "Edit", new { cliente.Id }, new { @class = "btn btn-warning btn-xs" })
+                        <button data-cliente-id="@cliente.Id" class="btn btn-danger btn-xs js-delete"> Remover </button>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-    <p>
-        @Html.ActionLink("Novo Vendedor", "New", null, new { @class = "btn btn-primary" })
-    </p>
+    
 }
 else
 {
@@ -43,4 +47,37 @@ else
         @Html.ActionLink("Novo Vendedor", "New", null, new { @class = "btn btn-primary" })
     </p>
     <p>Não há nenhum vendedor cadastrado!</p>
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $("#vendedores").on("click",".js-delete",
+                function () {
+                    var button = $(this);
+                    bootbox.confirm("Tem certeza que quer remover este vendedor?",
+                        function(result) {
+                            if (result) {
+                                $.ajax({
+                                    url: "/vendedores/delete/" + button.attr("data-vendedor-id"),
+                                    method: "GET",
+                                    success: function() {
+                                        button.parents("tr").remove();
+                                    }
+                                });
+                            }
+                        });
+                    /*if (confirm("Tem certeza que quer remover este cliente?")) {
+                        $.ajax({
+                            url: "/customers/delete/" + button.attr("data-customer-id"),
+                            method: "GET",
+                            success: function() {
+                                button.parents("tr").remove();
+                            }
+                        });
+                    }*/
+                });
+        });
+    </script>
 }

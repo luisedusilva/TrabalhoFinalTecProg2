@@ -9,6 +9,7 @@
 
 @using (Html.BeginForm("Save", "Locacoes"))
 {
+    @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.Locacao.Id)
     <div class="form-group">
         @Html.LabelFor(m => m.Locacao.DataLocacao)
@@ -17,22 +18,28 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Locacao.Veiculo)
-        @Html.DropDownListFor(m => m.Locacao.Veiculo,
+        @Html.DropDownListFor(m => m.Locacao.Veiculo_Id,
             new SelectList(Model.Veiculos, "Id", "Modelo"), "Escolha", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Locacao.Veiculo)
+        @Html.ValidationMessageFor(m => m.Locacao.Veiculo_Id)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Locacao.Vendedor)
-        @Html.DropDownListFor(m => m.Locacao.Vendedor,
+        @Html.DropDownListFor(m => m.Locacao.Vendedor_Id,
             new SelectList(Model.Vendedores, "Id", "Nome"), "Escolha", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Locacao.Vendedor)
+        @Html.ValidationMessageFor(m => m.Locacao.Vendedor_Id)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Locacao.Cliente)
-        @Html.DropDownListFor(m => m.Locacao.Cliente,
+        @Html.DropDownListFor(m => m.Locacao.Cliente_Id,
             new SelectList(Model.Clientes, "Id", "Nome"), "Escolha", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Locacao.Cliente)
+        @Html.ValidationMessageFor(m => m.Locacao.Cliente_Id)
     </div>
 
     <button type="submit" class="btn btn-primary">Salvar</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~bundles/jqueryval")
+
 }

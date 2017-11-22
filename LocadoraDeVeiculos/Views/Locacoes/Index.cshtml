@@ -14,33 +14,32 @@
         @Html.ActionLink("Nova Locação", "New", null, new { @class = "btn btn-primary" })
     </p>
 
-    <table class="table">
+    <table id="locacoes" class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Veiculo</th>
                 <th>Data de Locação</th>
                 <th>Data de Devolução</th>
-                <th>Opções</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var cliente in Model)
+            @foreach (var locacao in Model)
             {
                 <tr>
-                    <th scope="row">@cliente.Id</th>
-                    <td>@cliente.Veiculo</td>
-                    <td>@cliente.DataLocacao</td>
+                    <th scope="row">@locacao.Id</th>
+                    <td>@locacao.Veiculo</td>
+                    <td>@locacao.DataLocacao</td>
                     <td>
-                        @Html.ActionLink("Ver", "Details", new { cliente.Id }, new { @class = "btn btn-success btn-xs" })
-                        @Html.ActionLink("Editar", "Edit", new { cliente.Id }, new { @class = "btn btn-warning btn-xs" })
-                        <button data-cliente-id="@cliente.Id" class="btn btn-danger btn-xs js-delete"> Remover </button>
+                        @Html.ActionLink("Ver", "Details", new { locacao.Id }, new { @class = "btn btn-success btn-xs" })
+                        @Html.ActionLink("Editar", "Edit", new { locacao.Id }, new { @class = "btn btn-warning btn-xs" })
+                        <button data-locacao-id="@locacao.Id" class="btn btn-danger btn-xs js-delete"> Remover </button>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-    
+
 }
 else
 {
@@ -50,6 +49,9 @@ else
     <p>Não há nenhuma locação.</p>
 }
 
+
+
+
 @section scripts
 {
     <script>
@@ -57,7 +59,7 @@ else
             $("#locacoes").on("click",".js-delete",
                 function () {
                     var button = $(this);
-                    bootbox.confirm("Tem certeza que quer remover esta locação?",
+                    bootbox.confirm("Tem certeza que quer remover este cliente?",
                         function(result) {
                             if (result) {
                                 $.ajax({

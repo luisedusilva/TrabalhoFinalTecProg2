@@ -16,6 +16,7 @@ namespace LocadoraDeVeiculos
                 "~/Scripts/jquery.validate.js",
                 "~/Scripts/jquery.validate.unobtrusive.js",
                 "~/Scripts/modelo-pt.js",
+                "~/Scripts/globalize.js",
                 "~/Scripts/helper.js"
                 );
             bundle.Orderer = new AsIsBundleOrderer();

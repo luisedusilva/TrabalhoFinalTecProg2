@@ -14,7 +14,7 @@
         @Html.ActionLink("Novo Vendedor", "New", null, new { @class = "btn btn-primary" })
     </p>
 
-    <table class="table">
+    <table id="vendedores" class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>Id</th>
@@ -24,22 +24,22 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var cliente in Model)
+            @foreach (var vendedor in Model)
             {
                 <tr>
-                    <th scope="row">@cliente.Id</th>
-                    <td>@cliente.Nome</td>
-                    <td>@cliente.Cadastro</td>
+                    <th scope="row">@vendedor.Id</th>
+                    <td>@vendedor.Nome</td>
+                    <td>@vendedor.Cadastro</td>
                     <td>
-                        @Html.ActionLink("Ver", "Details", new { cliente.Id }, new { @class = "btn btn-success btn-xs" })
-                        @Html.ActionLink("Editar", "Edit", new { cliente.Id }, new { @class = "btn btn-warning btn-xs" })
-                        <button data-cliente-id="@cliente.Id" class="btn btn-danger btn-xs js-delete"> Remover </button>
+                        @Html.ActionLink("Ver", "Details", new { vendedor.Id }, new { @class = "btn btn-success btn-xs" })
+                        @Html.ActionLink("Editar", "Edit", new { vendedor.Id }, new { @class = "btn btn-warning btn-xs" })
+                        <button data-vendedor-id="@vendedor.Id" class="btn btn-danger btn-xs js-delete"> Remover </button>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-    
+
 }
 else
 {
@@ -49,6 +49,7 @@ else
     <p>Não há nenhum vendedor cadastrado!</p>
 }
 
+
 @section scripts
 {
     <script>
@@ -56,7 +57,7 @@ else
             $("#vendedores").on("click",".js-delete",
                 function () {
                     var button = $(this);
-                    bootbox.confirm("Tem certeza que quer remover este vendedor?",
+                    bootbox.confirm("Tem certeza que quer remover este cliente?",
                         function(result) {
                             if (result) {
                                 $.ajax({

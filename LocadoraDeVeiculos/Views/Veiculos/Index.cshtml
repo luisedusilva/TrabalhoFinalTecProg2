@@ -14,7 +14,7 @@
         @Html.ActionLink("Novo Veículo", "New", null, new { @class = "btn btn-primary" })
     </p>
 
-    <table class="table">
+    <table id="veiculos" class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>Id</th>
@@ -27,25 +27,25 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var cliente in Model)
+            @foreach (var veiculo in Model)
             {
                 <tr>
-                    <th scope="row">@cliente.Id</th>
-                    <td>@cliente.Modelo</td>
-                    <td>@cliente.Marca</td>
-                    <td>@cliente.Placa</td>
-                    <td>@cliente.Ano</td>
-                    <td>@cliente.ValorDiaria</td>
+                    <th scope="row">@veiculo.Id</th>
+                    <td>@veiculo.Modelo</td>
+                    <td>@veiculo.Marca</td>
+                    <td>@veiculo.Placa</td>
+                    <td>@veiculo.Ano</td>
+                    <td>@veiculo.ValorDiaria</td>
                     <td>
-                        @Html.ActionLink("Ver", "Details", new { cliente.Id }, new { @class = "btn btn-success btn-xs" })
-                        @Html.ActionLink("Editar", "Edit", new { cliente.Id }, new { @class = "btn btn-warning btn-xs" })
-                        <button data-cliente-id="@cliente.Id" class="btn btn-danger btn-xs js-delete"> Remover </button>
+                        @Html.ActionLink("Ver", "Details", new { veiculo.Id }, new { @class = "btn btn-success btn-xs" })
+                        @Html.ActionLink("Editar", "Edit", new { veiculo.Id }, new { @class = "btn btn-warning btn-xs" })
+                        <button data-veiculo-id="@veiculo.Id" class="btn btn-danger btn-xs js-delete"> Remover </button>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-   
+
 }
 else
 {
@@ -55,6 +55,7 @@ else
     <p>Não há nenhum veículo cadastrado.</p>
 }
 
+
 @section scripts
 {
     <script>
@@ -62,7 +63,7 @@ else
             $("#veiculos").on("click",".js-delete",
                 function () {
                     var button = $(this);
-                    bootbox.confirm("Tem certeza que quer remover este veículo?",
+                    bootbox.confirm("Tem certeza que quer remover este cliente?",
                         function(result) {
                             if (result) {
                                 $.ajax({

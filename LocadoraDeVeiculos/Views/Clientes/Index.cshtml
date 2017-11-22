@@ -37,7 +37,6 @@
                         @Html.ActionLink("Ver", "Details", new { cliente.Id }, new { @class = "btn btn-success btn-xs" })
                         @Html.ActionLink("Editar", "Edit", new { cliente.Id }, new { @class = "btn btn-warning btn-xs" })
                         <button data-cliente-id="@cliente.Id" class="btn btn-danger btn-xs js-delete"> Remover </button>
-
                     </td>
                 </tr>
             }
@@ -53,6 +52,8 @@ else
     </p>
     <p>Não há nenhum cliente cadastrado!</p>
 }
+
+
 
 @section scripts
 {

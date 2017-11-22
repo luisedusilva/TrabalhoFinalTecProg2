@@ -61,6 +61,7 @@ namespace LocadoraDeVeiculos.Controllers
         }
 
         [HttpPost] // só será acessada com POST
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Locacao locacao) // recebemos um cliente
         {
             if (!ModelState.IsValid)

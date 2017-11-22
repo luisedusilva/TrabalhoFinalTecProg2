@@ -58,6 +58,7 @@ namespace LocadoraDeVeiculos.Controllers
         }
 
         [HttpPost] // só será acessada com POST
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Veiculo veiculo) // recebemos um cliente
         {
             if (veiculo.Id == 0)

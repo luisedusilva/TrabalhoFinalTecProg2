@@ -235,6 +235,18 @@
     <Compile Include="Migrations\201711080006118_forms.Designer.cs">
       <DependentUpon>201711080006118_forms.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711212353449_Model.cs" />
+    <Compile Include="Migrations\201711212353449_Model.Designer.cs">
+      <DependentUpon>201711212353449_Model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711212355342_Required.cs" />
+    <Compile Include="Migrations\201711212355342_Required.Designer.cs">
+      <DependentUpon>201711212355342_Required.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711220000156_ModelId.cs" />
+    <Compile Include="Migrations\201711220000156_ModelId.Designer.cs">
+      <DependentUpon>201711220000156_ModelId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cliente.cs" />
@@ -267,9 +279,23 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\cldr.js" />
+    <Content Include="Scripts\cldr\event.js" />
+    <Content Include="Scripts\cldr\supplemental.js" />
+    <Content Include="Scripts\cldr\unresolved.js" />
+    <Content Include="Scripts\globalize.js" />
+    <Content Include="Scripts\globalize\currency.js" />
+    <Content Include="Scripts\globalize\date.js" />
+    <Content Include="Scripts\globalize\message.js" />
+    <Content Include="Scripts\globalize\number.js" />
+    <Content Include="Scripts\globalize\plural.js" />
+    <Content Include="Scripts\globalize\relative-time.js" />
+    <Content Include="Scripts\globalize\unit.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.globalize.js" />
+    <Content Include="Scripts\jquery.validate.globalize.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -361,6 +387,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711080006118_forms.resx">
       <DependentUpon>201711080006118_forms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711212353449_Model.resx">
+      <DependentUpon>201711212353449_Model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711212355342_Required.resx">
+      <DependentUpon>201711212355342_Required.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711220000156_ModelId.resx">
+      <DependentUpon>201711220000156_ModelId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

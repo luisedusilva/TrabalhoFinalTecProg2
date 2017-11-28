@@ -247,8 +247,13 @@
     <Compile Include="Migrations\201711220000156_ModelId.Designer.cs">
       <DependentUpon>201711220000156_ModelId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711282226467_createUsers.cs" />
+    <Compile Include="Migrations\201711282226467_createUsers.Designer.cs">
+      <DependentUpon>201711282226467_createUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\RoleName.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -354,6 +359,10 @@
     <Content Include="Views\Locacoes\LocacaoForm.cshtml" />
     <Content Include="Views\Veiculos\VeiculoForm.cshtml" />
     <Content Include="Views\Vendedores\VendedorForm.cshtml" />
+    <Content Include="Views\Clientes\ReadOnlyIndex.cshtml" />
+    <Content Include="Views\Locacoes\ReadOnlyIndex.cshtml" />
+    <Content Include="Views\Veiculos\ReadOnlyIndex.cshtml" />
+    <Content Include="Views\Vendedores\ReadOnlyIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -396,6 +405,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711220000156_ModelId.resx">
       <DependentUpon>201711220000156_ModelId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711282226467_createUsers.resx">
+      <DependentUpon>201711282226467_createUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

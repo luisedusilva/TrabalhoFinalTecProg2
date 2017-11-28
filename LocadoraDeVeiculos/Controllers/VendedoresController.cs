@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace LocadoraDeVeiculos.Controllers
 {
+    [Authorize]
     public class VendedoresController : Controller
     {
         // GET: Vendedor
@@ -26,16 +27,15 @@ namespace LocadoraDeVeiculos.Controllers
             _context.Dispose();
         }
         // GET: Cliente
-
+        [Authorize]
         public ActionResult Index()
         {
-
             var vendedores = _context.Vendedores.ToList();
-
-
-            return View(vendedores);
+            if (User.IsInRole("StoreAdmin"))
+                return View(vendedores);
+            return View("ReadOnlyIndex", vendedores);
         }
-
+        [Authorize(Roles = "StoreAdmin")]
         public ActionResult Details(int id)
         {
             var vendedor = _context.Vendedores.SingleOrDefault(c => c.Id == id);
@@ -48,7 +48,7 @@ namespace LocadoraDeVeiculos.Controllers
             return View(vendedor);
 
         }
-
+        [Authorize(Roles = "StoreAdmin")]
         public ActionResult New()
         {
 
@@ -59,6 +59,7 @@ namespace LocadoraDeVeiculos.Controllers
 
         [HttpPost] // só será acessada com POST
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "StoreAdmin")]
         public ActionResult Save(Vendedor vendedor) // recebemos um cliente
         {
             if (vendedor.Id == 0)
@@ -80,7 +81,7 @@ namespace LocadoraDeVeiculos.Controllers
             // Voltamos para a lista de clientes
             return RedirectToAction("Index");
         }
-
+        [Authorize(Roles = "StoreAdmin")]
         public ActionResult Edit(int id)
         {
             var vendedor = _context.Vendedores.SingleOrDefault(c => c.Id == id);
@@ -91,7 +92,7 @@ namespace LocadoraDeVeiculos.Controllers
 
             return View("VendedorForm", vendedor);
         }
-
+        [Authorize(Roles = "StoreAdmin")]
         public ActionResult Delete(int id)
         {
             var vendedor = _context.Vendedores.SingleOrDefault(c => c.Id == id);

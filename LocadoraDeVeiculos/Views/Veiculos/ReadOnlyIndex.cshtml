@@ -1,44 +1,42 @@
-﻿@model IEnumerable<LocadoraDeVeiculos.Models.Locacao>
+﻿@model IEnumerable<LocadoraDeVeiculos.Models.Veiculo>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Locações</h2>
+<h2>Veículos</h2>
 
 
 @if (Model.Any())
 {
 
     <p>
-        @Html.ActionLink("Nova Locação", "New", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Novo Veículo", "New", null, new { @class = "btn btn-primary" })
     </p>
 
-    <table id="locacoes" class="table table-bordered table-hover">
+    <table id="veiculos" class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Veiculo</th>
-                <th>Data de Locação</th>
-                <th>Vendedor</th>
-                <th>Cliente</th>
-                <th>Opções</th>
+                <th>Modelo</th>
+                <th>Marca</th>
+                <th>Placa</th>
+                <th>Ano</th>
+                <th>Valor Diária</th>
+
             </tr>
         </thead>
         <tbody>
-            @foreach (var locacao in Model)
+            @foreach (var veiculo in Model)
             {
                 <tr>
-                    <th scope="row">@locacao.Id</th>
-                    <td>@locacao.Veiculo.Modelo</td>
-                    <td>@locacao.DataLocacao</td>
-                    <td>@locacao.Vendedor</td>
-                    <td>@locacao.Cliente</td>
-                    <td>
-                        @Html.ActionLink("Ver", "Details", new { locacao.Id }, new { @class = "btn btn-success btn-xs" })
-                        @Html.ActionLink("Editar", "Edit", new { locacao.Id }, new { @class = "btn btn-warning btn-xs" })
-                        <button data-locacao-id="@locacao.Id" class="btn btn-danger btn-xs js-delete"> Remover </button>
-                    </td>
+                    <th scope="row">@veiculo.Id</th>
+                    <td>@veiculo.Modelo</td>
+                    <td>@veiculo.Marca</td>
+                    <td>@veiculo.Placa</td>
+                    <td>@veiculo.Ano</td>
+                    <td>@veiculo.ValorDiaria</td>
+                    
                 </tr>
             }
         </tbody>
@@ -48,26 +46,24 @@
 else
 {
     <p>
-        @Html.ActionLink("Nova Locação", "New", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Novo Veículo", "New", null, new { @class = "btn btn-primary" })
     </p>
-    <p>Não há nenhuma locação.</p>
+    <p>Não há nenhum veículo cadastrado.</p>
 }
-
-
 
 
 @section scripts
 {
     <script>
         $(document).ready(function() {
-            $("#locacoes").on("click",".js-delete",
+            $("#veiculos").on("click",".js-delete",
                 function () {
                     var button = $(this);
                     bootbox.confirm("Tem certeza que quer remover este cliente?",
                         function(result) {
                             if (result) {
                                 $.ajax({
-                                    url: "/locacoes/delete/" + button.attr("data-locacao-id"),
+                                    url: "/veiculos/delete/" + button.attr("data-veiculo-id"),
                                     method: "GET",
                                     success: function() {
                                         button.parents("tr").remove();

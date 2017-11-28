@@ -32,7 +32,7 @@ namespace LocadoraDeVeiculos.Controllers
             return View(locacoes);
 
         }
-
+        [Authorize(Roles = "StoreAdmin")]
         public ActionResult Details(int id)
         {
             var locacao = _context.Locacoes.Include(a => a.Veiculo).Include(b => b.Cliente).Include(c => c.Vendedor).SingleOrDefault(a => a.Id == id);
@@ -45,7 +45,7 @@ namespace LocadoraDeVeiculos.Controllers
             return View(locacao);
 
         }
-
+        [Authorize(Roles = "StoreAdmin")]
         public ActionResult New()
         {
 
@@ -62,6 +62,7 @@ namespace LocadoraDeVeiculos.Controllers
 
         [HttpPost] // só será acessada com POST
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "StoreAdmin")]
         public ActionResult Save(Locacao locacao) // recebemos um cliente
         {
             if (!ModelState.IsValid)
@@ -96,7 +97,7 @@ namespace LocadoraDeVeiculos.Controllers
             // Voltamos para a lista de clientes
             return RedirectToAction("Index");
         }
-
+        [Authorize(Roles = "StoreAdmin")]
         public ActionResult Edit(int id)
         {
             var locacao = _context.Locacoes.SingleOrDefault(c => c.Id == id);
@@ -116,7 +117,7 @@ namespace LocadoraDeVeiculos.Controllers
 
             return View("LocacaoForm", viewModel);
         }
-
+        [Authorize(Roles = "StoreAdmin")]
         public ActionResult Delete(int id)
         {
             var locacao = _context.Locacoes.SingleOrDefault(c => c.Id == id);

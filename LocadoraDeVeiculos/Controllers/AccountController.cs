@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using LocadoraDeVeiculos.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace LocadoraDeVeiculos.Controllers
 {
@@ -155,6 +156,7 @@ namespace LocadoraDeVeiculos.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

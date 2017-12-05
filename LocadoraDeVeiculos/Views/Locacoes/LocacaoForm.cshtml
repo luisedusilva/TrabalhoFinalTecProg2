@@ -18,21 +18,21 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Locacao.Veiculo)
-        @Html.DropDownListFor(m => m.Locacao.Veiculo_Id,
+        @Html.DropDownListFor(m => m.Locacao.VeiculoId,
             new SelectList(Model.Veiculos, "Id", "Modelo"), "Escolha", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Locacao.Veiculo_Id)
+        @Html.ValidationMessageFor(m => m.Locacao.VeiculoId)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Locacao.Vendedor)
-        @Html.DropDownListFor(m => m.Locacao.Vendedor_Id,
+        @Html.DropDownListFor(m => m.Locacao.VendedorId,
             new SelectList(Model.Vendedores, "Id", "Nome"), "Escolha", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Locacao.Vendedor_Id)
+        @Html.ValidationMessageFor(m => m.Locacao.VendedorId)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Locacao.Cliente)
-        @Html.DropDownListFor(m => m.Locacao.Cliente_Id,
+        @Html.DropDownListFor(m => m.Locacao.ClienteId,
             new SelectList(Model.Clientes, "Id", "Nome"), "Escolha", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Locacao.Cliente_Id)
+        @Html.ValidationMessageFor(m => m.Locacao.ClienteId)
     </div>
 
     <button type="submit" class="btn btn-primary">Salvar</button>

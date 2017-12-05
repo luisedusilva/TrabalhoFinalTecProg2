@@ -28,14 +28,14 @@ namespace LocadoraDeVeiculos.Controllers
 
         public ActionResult Index()
         {
-            var locacoes = _context.Locacoes.Include(a => a.Veiculo).Include(b => b.Cliente).Include(c => c.Vendedor).ToList();
+            var locacoes = _context.Locacoes.Include(a => a.Veiculo).Include(a => a.Cliente).Include(a => a.Vendedor).ToList();
             return View(locacoes);
 
         }
         [Authorize(Roles = "StoreAdmin")]
         public ActionResult Details(int id)
         {
-            var locacao = _context.Locacoes.Include(a => a.Veiculo).Include(b => b.Cliente).Include(c => c.Vendedor).SingleOrDefault(a => a.Id == id);
+            var locacao = _context.Locacoes.Include(a => a.Veiculo).Include(a => a.Cliente).Include(a => a.Vendedor).SingleOrDefault(a => a.Id == id);
 
             if (locacao == null)
             {
@@ -65,6 +65,7 @@ namespace LocadoraDeVeiculos.Controllers
         [Authorize(Roles = "StoreAdmin")]
         public ActionResult Save(Locacao locacao) // recebemos um cliente
         {
+
             if (!ModelState.IsValid)
             {
                 var viewModel = new LocacaoIndexViewModel

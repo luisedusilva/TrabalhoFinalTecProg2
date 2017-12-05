@@ -61,6 +61,13 @@ namespace LocadoraDeVeiculos.Controllers
         [ValidateAntiForgeryToken]        [Authorize(Roles = "StoreAdmin")]
         public ActionResult Save(Cliente cliente) // recebemos um cliente
         {
+            if (!ModelState.IsValid)
+            {
+      
+
+                return View("ClienteForm", cliente);
+            }
+
             if (cliente.Id == 0)
             {
                 // armazena o cliente em memória

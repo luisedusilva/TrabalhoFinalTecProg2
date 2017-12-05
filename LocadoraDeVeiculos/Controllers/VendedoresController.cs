@@ -62,6 +62,12 @@ namespace LocadoraDeVeiculos.Controllers
         [Authorize(Roles = "StoreAdmin")]
         public ActionResult Save(Vendedor vendedor) // recebemos um cliente
         {
+            if (!ModelState.IsValid)
+            {
+
+
+                return View("VendedorForm", vendedor);
+            }
             if (vendedor.Id == 0)
             {
                 // armazena o cliente em memória

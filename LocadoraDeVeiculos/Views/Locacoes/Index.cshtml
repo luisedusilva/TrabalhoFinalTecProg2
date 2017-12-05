@@ -32,8 +32,8 @@
                     <th scope="row">@locacao.Id</th>
                     <td>@locacao.Veiculo.Modelo</td>
                     <td>@locacao.DataLocacao</td>
-                    <td>@locacao.Vendedor</td>
-                    <td>@locacao.Cliente</td>
+                    <td>@locacao.Vendedor.Nome</td>
+                    <td>@locacao.Cliente.Nome</td>
                     <td>
                         @Html.ActionLink("Ver", "Details", new { locacao.Id }, new { @class = "btn btn-success btn-xs" })
                         @Html.ActionLink("Editar", "Edit", new { locacao.Id }, new { @class = "btn btn-warning btn-xs" })

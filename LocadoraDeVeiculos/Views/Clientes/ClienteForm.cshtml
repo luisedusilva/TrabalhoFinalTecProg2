@@ -14,14 +14,17 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Nome)
         @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Nome)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Idade)
         @Html.TextBoxFor(m => m.Idade, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Idade)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.CPF)
         @Html.TextBoxFor(m => m.CPF, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.CPF)
     </div>
 
 
@@ -30,6 +33,6 @@
 
 @section scripts
 {
-    @Scripts.Render("~bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
 
 }

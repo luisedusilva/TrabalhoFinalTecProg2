@@ -14,10 +14,12 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Nome)
         @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Nome)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Cadastro)
         @Html.TextBoxFor(m => m.Cadastro, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Cadastro)
     </div>
 
     <button type="submit" class="btn btn-primary">Salvar</button>
